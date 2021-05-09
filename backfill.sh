@@ -58,7 +58,7 @@ for dt in "${DATES[@]}"; do
   while ! { [ $END_TIME = $START_TIME ] || { [ $END_TIME \> $START_TIME ] && [ $(date '+%H:%M') \> $START_TIME -o $(date '+%H:%M') = $START_TIME ] && [ $(date '+%H:%M') \< $END_TIME -o $(date '+%H:%M') = $END_TIME ]; } || { [ "$END_TIME" \< "$START_TIME" ] && { [ "$(date '+%H:%M')" \> "$START_TIME" ] || [ "$(date '+%H:%M')" = "$START_TIME" ] || [ "$(date '+%H:%M')" \< "$END_TIME" ] || [ "$(date '+%H:%M')" = "$END_TIME" ]; }; }; }; do
      sleep 1m
   done
-  command="kubectl exec -it -n airflow "$AIRFLOW_POD" -- airflow dags backfill -s "$dt" -e "$(date -d "${dt} + 1 day" "+%Y-%m-%d")" "$(if [ $RUN_BACKWARDS ]; then echo "-B"; fi)" "${POSITIONAL[@]}""
+  command="kubectl exec -it -n airflow "$AIRFLOW_POD" -- airflow backfill -s "$dt" -e "$(date -d "${dt} + 1 day" "+%Y-%m-%d")" "$(if [ $RUN_BACKWARDS ]; then echo "-B"; fi)" "${POSITIONAL[@]}""
   echo $command
   $command
 done
