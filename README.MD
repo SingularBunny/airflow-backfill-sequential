@@ -1,3 +1,7 @@
+Wrapper for:
+
+https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#backfill
+
 This script allows you to run Airflow `backfill` sequentially day by day.
 In addition to standart backfill arguments it has `--from-time` `--to-time`.
 These arguments limit a day time to run backfill to prevent intersections with a time in wich DAG runs.
