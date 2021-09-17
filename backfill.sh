@@ -62,12 +62,11 @@ for dt in "${DATES[@]}"; do
   echo $command
   $command
   RESULT=$?
-  
+
   if [ $RESULT -eq 0 ]; then
     echo success
   else
     echo failed
     exit 1
   fi
-
 done
